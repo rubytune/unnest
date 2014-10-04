@@ -12,22 +12,24 @@ module Unnest
               unnests[col] = opts.delete(col)
             end
           end
+        elsif opts.is_a?(Arel::Nodes::In) && opts.right.is_a?(Array) && opts.right.size > 1 &&
+              opts.left.is_a?(Arel::Attributes::Attribute)
+          unnests[opts.left.name] = opts.right
         end
 
         relation = clone
         relation.where_values += build_where(opts, rest)
 
-        i = 0
-        unless unnests.empty?
+	i = 0
+	unless unnests.empty?
           unnests.each do |col, values|
-            vals = values.map{ |v| connection.quote v }
-            unnest = "unnest(array[#{vals.join(',')}])"
+            unnest = "unnest(array[#{values.map(&:to_i).join(',')}])"
             tmp = "_unnest_vals#{i}"
             relation = relation.joins("INNER JOIN #{unnest} #{tmp} ON #{table_name}.#{col} = #{tmp}")
             i = i + 1
           end
-        end
-        relation
+	end
+	relation
       end
     end
   end
