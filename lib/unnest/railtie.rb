@@ -8,7 +8,7 @@ module Unnest
         if opts.is_a?(Hash)
           opts = opts.clone
           opts.keys.each do |col|
-            if "#_{col}"[-3..-1] == 'id' && opts[col].is_a?(Array) && opts[col].size > 1
+            if "_#{col}"[-3..-1] == '_id' && opts[col].is_a?(Array) && opts[col].size > 1
               unnests[col] = opts.delete(col)
             end
           end
