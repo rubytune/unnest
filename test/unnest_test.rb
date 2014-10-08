@@ -16,8 +16,6 @@ def connect!
     ActiveRecord::Base.establish_connection :adapter => 'postgresql', database: 'unnest_gem_test'
     ActiveRecord::Base.connection.execute 'CREATE TABLE IF NOT EXISTS parent_models (id SERIAL NOT NULL PRIMARY KEY)'
     ActiveRecord::Base.connection.execute 'CREATE TABLE IF NOT EXISTS child_models (id SERIAL NOT NULL PRIMARY KEY, parent_model_id INTEGER NOT NULL)'
-    ActiveRecord::Base.connection.execute 'DELETE FROM parent_models'
-    ActiveRecord::Base.connection.execute 'DELETE FROM child_models'
   rescue ActiveRecord::NoDatabaseError
     system('createdb -E UTF8 unnest_gem_test') && retry
   end
