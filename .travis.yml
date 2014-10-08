@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+  - 2.1.0
+env: 
+  - RAILS=3.2.14
+  - RAILS=4.1.6
+  - RAILS=4.2.0.beta2
