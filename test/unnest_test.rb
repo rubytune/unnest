@@ -72,7 +72,7 @@ class UnnestTest < test_framework
     assert_uses_unnest(ParentModel.where(:id => @parent_ids).to_sql, @parent_ids)
   end
 
-  def test_small_queries_are_not_altered
+  def test_queries_smaller_than_unnest_limit_are_not_altered
     with_unnest_limit(@parent_ids.size+1) do
       assert_uses_in(ParentModel.where(:id => @parent_ids).to_sql, @parent_ids)
     end
