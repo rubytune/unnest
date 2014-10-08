@@ -5,3 +5,5 @@ env:
   - RAILS=3.2.14
   - RAILS=4.1.6
   - RAILS=4.2.0.beta2
+before_script:
+  - psql -c 'create database unnest_gem_test;' -U postgres
