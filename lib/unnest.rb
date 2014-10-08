@@ -11,4 +11,4 @@ module Unnest
   end
 end
 
-require 'unnest/railtie'
+require 'unnest/railtie' if defined?(Rails)
