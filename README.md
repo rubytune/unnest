@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rubytune/unnest.svg?branch=master)](https://travis-ci.org/rubytune/unnest)
+
 unnest
 ======
 
