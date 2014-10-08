@@ -6,7 +6,7 @@ test_framework = if ActiveRecord::VERSION::STRING >= "4.1"
 else
   require 'test/unit'
   Test::Unit::TestCase
-                 end
+end
 
 require File.expand_path(File.dirname(__FILE__) + "/../lib/unnest")
 require File.expand_path(File.dirname(__FILE__) + "/../lib/unnest/relation")
