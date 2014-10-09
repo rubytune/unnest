@@ -31,7 +31,13 @@ module ActiveRecord
           unnests[col] = opts.delete(col)
         end
       elsif opts.is_a?(Arel::Nodes::In) && opts.right.is_a?(Array) && opts.right.size > Unnest.limit
-        unnests[opts.left.name] = opts.right
+        if defined?(Arel::Nodes::Casted)
+          unnests[opts.left.name] = opts.right.map do |id|
+            id.is_a?(Arel::Nodes::Casted) ? id.val : id
+          end
+        else
+          unnests[opts.left.name] = opts.right
+        end
         opts = nil
       end
       [opts, unnests]
